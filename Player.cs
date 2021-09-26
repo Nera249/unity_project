@@ -6,61 +6,88 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private bool JumpKeyPressed;
+
     private bool ZKeyPressed;
+
     private bool QKeyPressed;
+
     private bool SKeyPressed;
+
     private bool DKeyPressed;
+
+    public float fallingSpeed = -10f;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))                //Debug.Log("Space Key Pressed");           
+        if (
+            Input.GetKeyDown(KeyCode.Space) //Debug.Log("Space Key Pressed");
+        )
         {
-            JumpKeyPressed = true;
-        } else {
+            if (GetComponent<Rigidbody>().velocity.y < fallingSpeed)
+            {
+                JumpKeyPressed = true;
+            } else {
+                JumpKeyPressed = false;
+            }
+        }
+        else
+        {
             JumpKeyPressed = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Z))                           
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             ZKeyPressed = true;
-        } else {
+        }
+        else
+        {
             ZKeyPressed = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))                           
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             QKeyPressed = true;
-        } else {
+        }
+        else
+        {
             QKeyPressed = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.S))                           
+        if (Input.GetKeyDown(KeyCode.S))
         {
             SKeyPressed = true;
-        } else {
+        }
+        else
+        {
             SKeyPressed = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.D))                           
+        if (Input.GetKeyDown(KeyCode.D))
         {
             DKeyPressed = true;
-        } else {
+        }
+        else
+        {
             DKeyPressed = false;
         }
-
     }
 
-    // FixedUpdate is called once every phisyc update 
+    // FixedUpdate is called once every phisyc update
+
     private void FixedUpdate()
     {
-        if (JumpKeyPressed)                //Debug.Log("Space Key Pressed");           
+        if (
+            JumpKeyPressed //Debug.Log("Space Key Pressed");
+        )
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.up * 7, ForceMode.VelocityChange);
+            GetComponent<Rigidbody>()
+                .AddForce(Vector3.up * 7, ForceMode.VelocityChange);
             JumpKeyPressed = false;
         }
         if (ZKeyPressed)
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.forward * 1, ForceMode.VelocityChange);
+            GetComponent<Rigidbody>()
+                .AddForce(Vector3.forward * 1, ForceMode.VelocityChange);
 
             if (Input.GetKeyUp(KeyCode.Z))
             {
@@ -69,7 +96,8 @@ public class Player : MonoBehaviour
         }
         if (QKeyPressed)
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.left * 1, ForceMode.VelocityChange);
+            GetComponent<Rigidbody>()
+                .AddForce(Vector3.left * 1, ForceMode.VelocityChange);
 
             if (Input.GetKeyUp(KeyCode.S))
             {
@@ -78,7 +106,8 @@ public class Player : MonoBehaviour
         }
         if (SKeyPressed)
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.back * 1, ForceMode.VelocityChange);
+            GetComponent<Rigidbody>()
+                .AddForce(Vector3.back * 1, ForceMode.VelocityChange);
 
             if (Input.GetKeyUp(KeyCode.S))
             {
@@ -87,13 +116,13 @@ public class Player : MonoBehaviour
         }
         if (DKeyPressed)
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.right * 1, ForceMode.VelocityChange);
+            GetComponent<Rigidbody>()
+                .AddForce(Vector3.right * 1, ForceMode.VelocityChange);
 
             if (Input.GetKeyUp(KeyCode.D))
             {
                 DKeyPressed = false;
             }
         }
-
     }
 }
